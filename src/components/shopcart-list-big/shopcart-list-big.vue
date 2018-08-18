@@ -2,10 +2,10 @@
 <transition>
   <div class="order-list">
     <div class="header border-bottom">
-      <router-link class="title" tag="span" to="/home">
+      <span class="title" @click="back">
         <i class="iconfont icon-houtui"></i>
-        返回商城
-      </router-link>
+        返回
+      </span>
       <span class="edit" @click="edit">编辑</span>
     </div>
     <div class="loading-wrapper" v-show="!cartProductList.length">
@@ -102,6 +102,9 @@ export default {
         this.cartTotalPrice = res.data.data.cartTotalPrice
         console.log('_get', this.cartProductList)
       })
+    },
+    back() {
+      this.$router.back()
     },
     ToDetail(id) {
       this.$router.push({

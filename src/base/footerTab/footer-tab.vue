@@ -69,6 +69,7 @@ export default {
   background: #f8f8f8
   padding: 4px 0px
   box-sizing: border-box
+  z-index: 30
   .item
     width: 25%
     text-align: center

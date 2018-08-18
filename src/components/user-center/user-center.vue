@@ -2,24 +2,27 @@
   <transition>
     <div class="user-center">
       <div class="header border-bottom">
-        <div class="header-left">我的订单</div>
-        <div class="header-right">
+        <div class="header-left" @click="back">
+          <i class="iconfont icon-houtui"></i>
+          返回
+        </div>
+        <router-link class="header-right" tag="div" to="/order-list">
           全部
           <i class="iconfont icon-qianjin"></i>
-        </div>
+        </router-link>
       </div>
       <div class="center-icon">
         <div class="outer toPay-content">
           <div class="icon-box">
             <i class="iconfont icon-icon-test"></i>
           </div>
-          <div class="msg-box">待付款</div>
+          <router-link class="msg-box"  tag="div" to="/shopcart-list-big">待付款</router-link>
         </div>
         <div class="outer toPay-content">
           <div class="icon-box">
             <i class="iconfont icon-icon-test"></i>
           </div>
-          <div class="msg-box">完成订单</div>
+          <router-link class="msg-box" tag="div" to="/order-list">完成订单</router-link>
         </div>
         <div class="outer toPay-content">
           <div class="icon-box">
@@ -67,6 +70,9 @@ export default {
     }
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     toggleSettings() {
       this.showSettings = !this.showSettings
     },
@@ -102,6 +108,7 @@ export default {
   left: 0px
   right: 0px
   background: #eee
+  z-index: 90
   &.v-enter-active, &.v-leave-active
     transition: all .4s
   &.v-enter, &.v-leave-to
@@ -119,6 +126,8 @@ export default {
       display: inline-block
       font-size: $font-size-medium-x
       line-height: 44px
+      .iconfont
+        font-size: $font-size-medium-x
     .header-right
       display: inline-block
       font-size: $font-size-medium-x
@@ -189,7 +198,7 @@ export default {
     bottom: 0px
     width: 100%
     background: $color-background
-    z-index: 300
+    z-index: 500
     background: #fff
     &.v-enter-active, &.v-leave-active
       transition: all .4s

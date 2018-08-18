@@ -117,7 +117,7 @@ export default {
       this._checkLogin()
     },
     _checkLogin() {
-      this.getAjax('/user/get_information.do', '/order-list')
+      this.getAjax('/user/get_information.do', '/shopcart-list-big')
     },
     decreaseCount(id, nowCount) {
       // this.$emit('decCount', id)

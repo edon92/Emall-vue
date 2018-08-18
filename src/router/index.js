@@ -10,6 +10,7 @@ import Category from 'components/categories/categories'
 import GoodData from 'components/categories/components/goodData'
 import UserCenter from 'components/user-center/user-center'
 import SearchList from 'components/searchList/searchList'
+import OrderList from 'components/order-list//order-list'
 import shopcartListBig from 'components/shopcart-list-big/shopcart-list-big'
 import Login from 'components/login/login'
 Vue.use(Router)
@@ -31,6 +32,10 @@ export default new Router({
     {
       path: '/shopcart-list-big',
       component: shopcartListBig
+    },
+    {
+      path: '/order-list',
+      component: OrderList
     },
     {
       path: '/computer',

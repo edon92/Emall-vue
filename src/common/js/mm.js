@@ -33,7 +33,10 @@ export function getAxios(params, bc) {
       }
       return str.join('&')
     }
-  }).then(bc)
+  }).then(bc).catch((error) => {
+    console.log(error)
+    Salert('网络连接失败', 'error')
+  })
 }
 
 export function transformData(obj) {
