@@ -6,10 +6,13 @@
         <i class="iconfont icon-houtui"></i>
         返回
       </span>
-      <span class="edit" @click="edit">编辑</span>
+      <span class="edit" @click.prevent="edit">编辑</span>
     </div>
-    <div class="loading-wrapper" v-show="!cartProductList.length">
+    <div class="loading-wrapper" v-show="showLoading">
       <loading></loading>
+    </div>
+    <div class="nothing-wrapper" v-show="!showLoading && !this.cartProductList.length" style="font-size: 18px;color: #f8762c; margin-left: 36%;margin-top: 30%">
+      购物车空空如也
     </div>
     <scroll class="list-content" :click="true">
       <div class="goods-wrapper">
@@ -22,14 +25,14 @@
          <div
           class="iconfont icon-dui checked"
           :class="{Unchecked: !(item.productChecked === 1)}"
-          @click="Unchecked(item.productId,item.productChecked)"
+          @click.stop="Unchecked(item.productId,item.productChecked)"
           v-show="!IsEdit"
         >
         </div>
-        <div class="iconfont icon-jianhao" v-show="IsEdit" @click="deleteItem(item.productId)"></div>
+        <div class="iconfont icon-jianhao" v-show="IsEdit" @click.stop="deleteItem(item.productId)"></div>
            <div class="count">
              <div class="countBtn">
-               <div class="iconfont icon-jian btn" @click="decreaseCount(item.productId, item.quantity)"></div>
+               <div class="iconfont icon-jian btn" @click.stop="decreaseCount(item.productId, item.quantity)"></div>
                <input
                 type="text"
                 class="num"
@@ -37,7 +40,7 @@
                 ref="goodCount"
                 @blur.prevent="submitQuantity(item.productId, index)"
                >
-               <div class="iconfont icon-jia btn" @click="increaseCount(item.productId, item.quantity)"></div>
+               <div class="iconfont icon-jia btn" @click.stop="increaseCount(item.productId, item.quantity)"></div>
              </div>
            </div>
           <div class="img">
@@ -100,6 +103,7 @@ export default {
       }, (res) => {
         this.cartProductList = res.data.data.cartProductVoList
         this.cartTotalPrice = res.data.data.cartTotalPrice
+        this.showLoading = false
         console.log('_get', this.cartProductList)
       })
     },
@@ -212,6 +216,9 @@ export default {
       }
     }
   },
+  created() {
+    this.showLoading = true
+  },
   activated() {
     this._getShopcartList()
     this.$nextTick(() => {
@@ -273,6 +280,7 @@ export default {
       color: rgb(56,161,216)
   .loading-wrapper
     margin-top: 150px
+  .nothing-wrapper
   .list-content
     position: absolute
     top: 44px

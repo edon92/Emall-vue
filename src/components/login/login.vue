@@ -24,13 +24,14 @@
           placeholder="请输入密码"
           class="password"
           ref="password"
+          @keyup.13="doLogin"
           >
         </div>
-        <div class="forget-password-box">Forget password</div>
+        <router-link class="forget-password-box" tag="div" to="/pass-reset">Forget password</router-link>
         <div class="login-box" @click="doLogin">Login</div>
         <div class="signup-box">
           <span class="new-user">New user?</span>
-          <span class="signup">Signup</span>
+          <router-link class="signup" tag="span" to="/register">Signup</router-link>
         </div>
       </div>
     </div>

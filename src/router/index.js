@@ -9,7 +9,11 @@ import Detail from '../components/detail/detail'
 import Category from 'components/categories/categories'
 import GoodData from 'components/categories/components/goodData'
 import UserCenter from 'components/user-center/user-center'
+import UserImformation from 'components/user-center/components/user-information'
+import UpdataPassword from 'components/user-center/components/update-Password'
 import SearchList from 'components/searchList/searchList'
+import Register from 'components/register/register'
+import PassReset from 'components/pass-reset/pass-reset'
 import OrderList from 'components/order-list//order-list'
 import shopcartListBig from 'components/shopcart-list-big/shopcart-list-big'
 import Login from 'components/login/login'
@@ -42,8 +46,26 @@ export default new Router({
       component: Computer
     },
     {
+      path: '/register',
+      component: Register
+    },
+    {
+      path: '/pass-reset',
+      component: PassReset
+    },
+    {
       path: '/user-center',
-      component: UserCenter
+      component: UserCenter,
+      children: [
+        {
+          path: 'information',
+          component: UserImformation
+        },
+        {
+          path: 'updatePassword',
+          component: UpdataPassword
+        }
+      ]
     },
     {
       path: '/login',

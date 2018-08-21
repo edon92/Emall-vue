@@ -191,6 +191,7 @@ export default {
     }
   },
   activated() {
+    console.log('activated')
     let id = this.$route.params.id
     axios.get(`/product/detail.do?productId=${id}`).then((res) => {
       this.goodDetail = res.data.data

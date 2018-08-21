@@ -29,6 +29,7 @@
              v-for="(item, index) in cartProductList"
              :key="index"
              v-show="item.quantity"
+             @click="ToDetail(item.productId)"
              >
               <div class="img">
                 <img :src="'http://img.happymmall.com/' + item.productMainImage" width="85" height="85">
@@ -89,6 +90,19 @@ export default {
     }
   },
   methods: {
+    // selectItem(id) {
+    //   console.log(id)
+    //   this.$router.push({
+    //     path: `/detail/productId=${id}`
+    //   })
+    // },
+    ToDetail(id) {
+      this.fold = !this.fold
+      this.$router.push({
+        path: `/detail/productId=${id}`
+      })
+      window.location.reload()
+    },
     addCart() {
       this._getShopcartList()
       this.fold = !this.fold
@@ -164,7 +178,7 @@ export default {
       }, (res) => {
         this.cartProductList = res.data.data.cartProductVoList
         this.cartTotalPrice = res.data.data.cartTotalPrice
-        console.log('更新购物车')
+        console.log('更新购物车', this.cartProductList)
       })
     },
     // 点击[加入购物车]，先检查是否登录

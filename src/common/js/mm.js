@@ -1,7 +1,7 @@
 import axios from 'axios'
 import swal from 'sweetalert'
 export function validate(value, type) {
-  value = value.trim()
+  // value = value.trim()
   if (type === 'require') {
     return !!value
   }
@@ -15,6 +15,15 @@ export function validate(value, type) {
 
 export function doLogin() {
   window.location.href = '/#/login?redirect=' + encodeURIComponent(window.location.href)
+}
+
+export function doLogout() {
+  getAxios({
+    url: '/user/logout.do'
+  }, (res) => {
+    console.log(res)
+    window.location.href = '/home'
+  })
 }
 
 export function goHome() {
@@ -35,7 +44,8 @@ export function getAxios(params, bc) {
     }
   }).then(bc).catch((error) => {
     console.log(error)
-    Salert('网络连接失败', 'error')
+    Salert('请求失败，请确保网络完好', 'error')
+    window.location.href = '/#/home'
   })
 }
 

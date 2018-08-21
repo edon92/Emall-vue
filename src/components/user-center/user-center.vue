@@ -7,7 +7,7 @@
           返回
         </div>
         <router-link class="header-right" tag="div" to="/order-list">
-          全部
+          全部订单
           <i class="iconfont icon-qianjin"></i>
         </router-link>
       </div>
@@ -28,9 +28,9 @@
           <div class="icon-box">
             <i class="iconfont icon-gerenxinxi"></i>
           </div>
-          <div class="msg-box">个人信息</div>
+          <router-link class="msg-box" tag="div" to="/user-center/information">个人信息</router-link>
         </div>
-        <div class="outer toPay-content">
+        <div class="outer toPay-content" @click="consumerRights">
           <div class="icon-box">
             <i class="iconfont icon-xiaofeiweiquan"></i>
           </div>
@@ -38,7 +38,7 @@
         </div>
       </div>
       <gap></gap>
-      <div class="contact-customer">
+      <div class="contact-customer" @click="callCusomer">
         <div class="left">联系客服</div>
         <div class="right iconfont icon-qianjin"></div>
       </div>
@@ -49,13 +49,14 @@
       </div>
       <transition>
         <div class="setting-msg" v-show="showSettings">
-          <div class="item updatePassword">修改密码</div>
+          <div class="item updatePassword" @click="updatePassword">修改密码</div>
           <div class="item loginOut" @click="doLogout">退出登录</div>
         </div>
       </transition>
       <transition>
         <div class="filter-mask" v-show="showSettings" @click="toggleSettings"></div>
       </transition>
+      <router-view></router-view>
     </div>
   </transition>
 </template>
@@ -72,6 +73,18 @@ export default {
   methods: {
     back() {
       this.$router.back()
+    },
+    updatePassword() {
+      this.$router.push({
+        path: '/user-center/updatePassword'
+      })
+      this.showSettings = !this.showSettings
+    },
+    consumerRights() {
+      alert('请联系qq:540324745,谢谢合作')
+    },
+    callCusomer() {
+      alert('抱歉，商品为自动商城，暂无客服')
     },
     toggleSettings() {
       this.showSettings = !this.showSettings
