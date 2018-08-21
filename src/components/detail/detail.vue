@@ -94,7 +94,7 @@ export default {
   mounted() {},
   methods: {
     back() {
-      this.$router.push('/home')
+      this.$router.back()
     },
     // 更新购物车数据
     _getShopcartList() {
@@ -103,7 +103,6 @@ export default {
       }, (res) => {
         this.cartProductList = res.data.data.cartProductVoList
         this.cartTotalPrice = res.data.data.cartTotalPrice
-        console.log(this.cartProductList)
       })
     },
     // 执行添加到购物车和把商品同步到state与后端
@@ -124,7 +123,6 @@ export default {
         // 请求成功
         if (res.data.status === 0) {
           // 更新购物车
-          console.log(res.data.data)
           this._getShopcartList()
           // 弹出成功信息
           Salert('已成功加入购物车', 'success')
@@ -166,7 +164,6 @@ export default {
       // this.insShopcart(id)
     },
     decCount(id) {
-      console.log('decCount', id)
       this.decShopcart(id)
     },
     deleteItem(id) {
@@ -191,12 +188,10 @@ export default {
     }
   },
   activated() {
-    console.log('activated')
     let id = this.$route.params.id
     axios.get(`/product/detail.do?productId=${id}`).then((res) => {
       this.goodDetail = res.data.data
       this.detail = res.data.data.detail
-      console.log(this.goodDetail)
     })
   },
   deactivated() {
