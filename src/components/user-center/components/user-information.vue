@@ -105,6 +105,11 @@ export default {
       let phone = this.$refs.inputPhone.value
       let question = this.$refs.inputQuestion.value
       let answer = this.$refs.inputAnswer.value
+      // 如果什么都不输入，则return
+      if (!email && !phone && !question && !question && !answer) {
+        this.IsEdit = false
+        return
+      }
       let data = transformData({
         phone: phone,
         email: email,

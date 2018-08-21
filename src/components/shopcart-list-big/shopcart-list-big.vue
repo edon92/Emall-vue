@@ -283,6 +283,8 @@ export default {
   .nothing-wrapper
   .list-content
     position: absolute
+    left: 0px
+    right: 0px
     top: 44px
     bottom: 0px
     .goods-wrapper
@@ -331,7 +333,6 @@ export default {
             margin-left: 68px
       .iconfont
         position: absolute
-        left: 0
         top: 50%
         margin-top: -8px
         font-size: $font-size-large
@@ -357,14 +358,31 @@ export default {
           margin: 0px
           no-wrap()
           max-width: 270px
-          @media only screen and (min-width:320px)
-            max-width: 180px
-          @media only screen and (min-width:375px)
+          @media only screen and (max-width:1024px)
+            max-width: 85%
+          @media only screen and (max-width:768px)
+            max-width: 70%
+          @media only screen and (max-width:414px)
             max-width: 240px
+          @media only screen and (max-width:375px)
+            max-width: 210px
+            font-size: 16px
+          @media only screen and (max-width:320px)
+            max-width: 150px
         .subtitle
           margin-top: 8px
           no-wrap()
           max-width: 200px
+          @media only screen and (max-width:1024px)
+            font-size: 18px
+          @media only screen and (max-width:768px)
+            font-size: 16px
+          @media only screen and (max-width:414px)
+            font-size: 14px
+          @media only screen and (max-width:375px)
+            font-size: 12px
+          @media only screen and (max-width:320px)
+            font-size: 10px
         .icon-cuo
           position: absolute
           padding: 5px

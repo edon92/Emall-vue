@@ -244,6 +244,14 @@ export default {
         .img
           width: 100%
           height: 450px
+          @media only screen and (min-width: 320px)
+            height: 345.5px
+          @media only screen and (min-width: 375px)
+            height: 405px
+          @media only screen and (min-width: 768px)
+            height: 824px
+          @media only screen and (min-width: 1024px)
+            height: 1105px
     .icon-back
       position: absolute
       padding: 4px

@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="order-list">
     <div class="header border-bottom">
-      <span class="title">订单列表</span>
+      <i class="iconfont icon-houtui" @click="back"></i>
+      <div class="title">订单列表</div>
     </div>
     <div class="order-header">
       <div class="msg msg1">商品信息</div>
@@ -61,6 +62,9 @@ export default {
     }
   },
   methods: {
+    back() {
+      this.$router.back()
+    },
     // 请求用户订单信息汇总
     _getOrderList() {
       getAxios({
@@ -119,10 +123,12 @@ export default {
     height: 30px
     font-size: $font-size-medium-x
     line-height: 30px
-    text-align: center
+    /* text-align: center */
     background: $color-background
     z-index: 30
     .title
+      display: inline-block
+      margin-left: 43%
       color: #444
     .edit
       float: right
