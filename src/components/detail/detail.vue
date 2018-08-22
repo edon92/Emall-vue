@@ -9,8 +9,9 @@
             v-for="item in ImgList"
             :key="item.id"
             class="img-box"
+            ref="imgBox"
             >
-            <img class="img" v-lazy="'http://img.happymmall.com/' + item" >
+            <img class="img" :style="{height: imgHeight}" v-lazy="'http://img.happymmall.com/' + item" >
           </swiper-slide>
           <!-- Optional controls -->
           <div class="swiper-pagination"  slot="pagination"></div>
@@ -78,6 +79,7 @@ export default {
   },
   data() {
     return {
+      imgHeight: '447px',
       goodDetail: {
         type: Object,
         default: {}
@@ -91,7 +93,6 @@ export default {
       detail: ''
     }
   },
-  mounted() {},
   methods: {
     back() {
       this.$router.back()
@@ -187,11 +188,17 @@ export default {
       return this.detail.match(/http:\/\/.*?jpg/gi)
     }
   },
+  mounted() {
+  },
   activated() {
     let id = this.$route.params.id
     axios.get(`/product/detail.do?productId=${id}`).then((res) => {
       this.goodDetail = res.data.data
       this.detail = res.data.data.detail
+      this.$nextTick(() => {
+        this.imgHeight = this.$refs.imgBox[0].$el.offsetHeight + 'px'
+        console.log(this.imgHeight)
+      })
     })
   },
   deactivated() {
@@ -213,8 +220,10 @@ export default {
 .detail >>> .swiper-container
   overflow: inherit
 .detail-page
-  position: relative
-  margin-top: -44px
+  position: absolute
+  top: 0
+  bottom: 0
+  /* margin-top: -44px */
   width: 100%
   height: 100%
   z-index: 50
@@ -243,8 +252,8 @@ export default {
         overflow: hidden
         .img
           width: 100%
-          height: 450px
-          @media only screen and (min-width: 320px)
+          height: 447px
+          /* @media only screen and (min-width: 320px)
             height: 345.5px
           @media only screen and (min-width: 375px)
             height: 405px
@@ -253,7 +262,7 @@ export default {
           @media only screen and (min-width: 768px)
             height: 824px
           @media only screen and (min-width: 1024px)
-            height: 1105px
+            height: 1105px */
     .icon-back
       position: absolute
       padding: 4px
