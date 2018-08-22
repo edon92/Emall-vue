@@ -10,7 +10,7 @@
             :key="item.id"
             class="img-box"
             >
-            <img class="img" :src="'http://img.happymmall.com/' + item" >
+            <img class="img" v-lazy="'http://img.happymmall.com/' + item" >
           </swiper-slide>
           <!-- Optional controls -->
           <div class="swiper-pagination"  slot="pagination"></div>
@@ -41,7 +41,7 @@
             <div class="text-3">购买</div>
           </div>
           <div class="img-wrapper" v-for="(item, index) in ImgDetail" :key="index">
-            <img :src="item" class="img">
+            <img v-lazy="item" class="img">
           </div>
         </div>
         <div class="footer-wrapper">
@@ -248,6 +248,8 @@ export default {
             height: 345.5px
           @media only screen and (min-width: 375px)
             height: 405px
+          @media only screen and (min-width: 414px)
+            height: 450px
           @media only screen and (min-width: 768px)
             height: 824px
           @media only screen and (min-width: 1024px)

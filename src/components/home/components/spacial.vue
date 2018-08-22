@@ -11,7 +11,7 @@
        :to="'/detail/productId=' + item.id"
        >
         <div class="good-img-box">
-          <img :src="'http://img.happymmall.com/' + item.mainImage" class="good-img">
+          <img v-lazy="'http://img.happymmall.com/' + item.mainImage" class="good-img">
         </div>
         <div class="good-msg-box">
           <div class="good-name">{{item.name}}</div>

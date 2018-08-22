@@ -44,7 +44,7 @@
              </div>
            </div>
           <div class="img">
-            <img :src="'http://img.happymmall.com/' + item.productMainImage" width="85" height="85">
+            <img v-lazy="'http://img.happymmall.com/' + item.productMainImage" width="85" height="85">
           </div>
           <div class="msg">
             <div class="name" ref="goodName">{{item.productName}}</div>

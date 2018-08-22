@@ -74,30 +74,6 @@ export default {
           this.$router.push('/home')
         }
       })
-      // axios({
-      //   method: 'post',
-      //   url: '/user/login.do',
-      //   data: {
-      //     username: inputUsername,
-      //     password: inputPassword
-      //   },
-      //   transformRequest(obj) {
-      //     var str = []
-      //     for (let p in obj) {
-      //       str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
-      //     }
-      //     return str.join('&')
-      //   }
-      // }).then((res) => {
-      //   if (res.data.status === 1) {
-      //     this.tips(res.data.msg)
-      //     return
-      //   }
-      //   if (res.data.status === 0) {
-      //     this.tips(res.data.msg, 'success')
-      //     this.$router.push('/home')
-      //   }
-      // })
     },
     tips(msg, type) {
       type = type || 'error'
@@ -116,6 +92,8 @@ export default {
           }
       )
     }
+  },
+  mounted() {
   }
 }
 </script>
@@ -124,11 +102,13 @@ export default {
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'
 .user-login
-  position: absolute
-  top: 0
-  bottom: 0
-  right: 0
-  left: 0
+  position: relative
+  top: 0rem
+  right: 0rem
+  bottom: 0rem
+  left: 0rem
+  height: 736px
+  overflow: hidden
   background: $color-background
   font-family: Microsoft YaHei
   z-index: 99
@@ -138,26 +118,26 @@ export default {
     transform: translate3d(100%, 0, 0)
   .iconfont
     position: absolute
-    top: 20px
-    left: 15px
+    top: .4rem
+    left: .3rem
     color: $color-text-o-s
   .logo
-    margin: 72px 277px 0 38px
+    margin: 1.44rem 5.44rem 0 .76rem
     color: $color-text-o-s
-    width: 77px
-    height: 77px
-    font-size: 77px
+    width: 1.56rem
+    height: 1.56rem
+    font-size: 1.56rem
   .msg1
-    margin-top: 19px
-    margin-left: 29px
-    font-size: 24px
+    margin-top: .38rem
+    margin-left: .48rem
+    font-size: .48rem
     font-weight:  bold
     font-family: Microsoft YaHei
   .msg2
-    margin-top: 19px
-    margin-left: 29px
+    margin-top: .38rem
+    margin-left: .58rem
     font-family: Microsoft YaHei
-    font-size: 14px
+    font-size: .28rem
     font-weight: bold
     color: rgba(153,153,153,1)
   .login-content
@@ -167,56 +147,56 @@ export default {
       &::before
         border-color: #555
       .username
-        margin-top: 27px
-        padding: 2px 7px
+        margin-top: .54rem
+        padding: .04rem .14rem
         width: 80%
-        height: 36px
+        height: .72rem
         background: $color-background
-        border-bottom: 1px solid
+        border-bottom: .02rem solid
     .user-password-box
       margin: 0 auto
       width: 80%
       &::before
         border-color: #555
       .password
-        margin-top: 27px
+        margin-top: .54rem
         padding: 2px 7px
         width: 80%
         height: 36px
         background: $color-background
-        border-bottom: 1px solid
+        border-bottom: .02rem solid
     .forget-password-box
       margin-top: 10px
-      margin-bottom: 23px
-      padding-right: 27px
-      font-size: 18px
+      margin-bottom: .46rem
+      padding-right: .54rem
+      font-size: .36rem
       color: rgba(153,153,153,1)
       font-weight: bold
-      line-height: 41px
-      height: 41px
+      line-height: .82rem
+      height: .82rem
       text-align: right
     .login-box
       margin: 0 auto
       text-align: center
-      width: 339px
-      height: 62px
-      line-height: 62px
-      font-size: 21px
+      width: 6.78rem
+      height: 1.24rem
+      line-height: 1.24rem
+      font-size: .42rem
       color: #fff
       background: $color-text-o-d
     .signup-box
-      margin-top: 31px
+      margin-top: .62rem
       text-align: center
       .new-user
-        height: 56px
-        line-height: 56px
+        height: 1.02rem
+        line-height: 1.02rem
         color: rgba(153,153,153,1)
-        font-size: 18px
+        font-size: .36rem
         font-weight: bold
       .signup
-        height: 49px
-        line-height: 49px
+        height: .98rem
+        line-height: .98rem
         color: $color-text-o-d
-        font-size: 18px
+        font-size: .36rem
         font-weight: bold
 </style>

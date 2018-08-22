@@ -32,7 +32,7 @@
              @click="ToDetail(item.productId)"
              >
               <div class="img">
-                <img :src="'http://img.happymmall.com/' + item.productMainImage" width="85" height="85">
+                <img v-lazy="'http://img.happymmall.com/' + item.productMainImage" width="85" height="85">
               </div>
               <div class="msg">
                 <div class="name" ref="goodName">{{item.productName}}</div>
@@ -90,12 +90,6 @@ export default {
     }
   },
   methods: {
-    // selectItem(id) {
-    //   console.log(id)
-    //   this.$router.push({
-    //     path: `/detail/productId=${id}`
-    //   })
-    // },
     ToDetail(id) {
       this.fold = !this.fold
       this.$router.push({
@@ -104,7 +98,14 @@ export default {
       window.location.reload()
     },
     addCart() {
-      this._getShopcartList()
+      getAxios({
+        url: '/user/get_information.do'
+      }, (res) => {
+        if (res.data.status === 0) {
+          // 更新购物车数据
+          this._getShopcartList()
+        }
+      })
       this.fold = !this.fold
       this.$nextTick(() => {
         this.$refs.scroll.refresh()
@@ -178,7 +179,6 @@ export default {
       }, (res) => {
         this.cartProductList = res.data.data.cartProductVoList
         this.cartTotalPrice = res.data.data.cartTotalPrice
-        console.log('更新购物车', this.cartProductList)
       })
     },
     // 点击[加入购物车]，先检查是否登录
@@ -203,14 +203,15 @@ export default {
     }
   },
   mounted() {
-    this._getShopcartList()
+    getAxios({
+      url: '/user/get_information.do'
+    }, (res) => {
+      if (res.data.status === 0) {
+        // 更新购物车数据
+        this._getShopcartList()
+      }
+    })
   }
-  // watch: {
-  //   cartProductList() {
-  //     console.log('change')
-  //     this._getShopcartList()
-  //   }
-  // }
 }
 </script>
 

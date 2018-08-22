@@ -31,7 +31,7 @@
           >
             <div class="line-box imgAndName">
               <div class="line-box img">
-                <img :src="'http://img.happymmall.com/' + good.productImage" width="60" height="60">
+                <img v-lazy="'http://img.happymmall.com/' + good.productImage" width="60" height="60">
               </div>
               <div class="line-box name" ref="goodName">{{good.productName}}</div>
             </div>

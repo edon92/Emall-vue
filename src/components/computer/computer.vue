@@ -7,7 +7,7 @@
        @click="selectProduct(item.id)"
        >
         <div class="img-box">
-          <img :src="'http://img.happymmall.com/' + item.mainImage" class="good-img">
+          <img v-lazy="'http://img.happymmall.com/' + item.mainImage" class="good-img">
         </div>
         <div class="good-msg">
           <div class="good-name">{{item.name}}</div>

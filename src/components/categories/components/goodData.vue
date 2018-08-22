@@ -9,7 +9,7 @@
       <div class="good-wrapper">
         <div class="good border" v-for="item in keywordData" @click="selectProduct(item.id)" :key="item.id">
           <div class="img-box">
-            <img :src="'http://img.happymmall.com/' + item.mainImage" class="img" width="158" height="184">
+            <img v-lazy="'http://img.happymmall.com/' + item.mainImage" class="img" width="158" height="184">
           </div>
           <div class="msg-box">
             <div class="name">{{item.name}}</div>

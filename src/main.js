@@ -6,7 +6,12 @@ import router from './router'
 import 'common/border.css'
 import 'common/iconfont/iconfont.css'
 import 'common/reset.css'
+import VueLazyLoad from 'vue-lazyload'
 import store from './store'
+
+Vue.use(VueLazyLoad, {
+  loading: require('common/image/lazyload.gif')
+})
 
 Vue.config.productionTip = false
 

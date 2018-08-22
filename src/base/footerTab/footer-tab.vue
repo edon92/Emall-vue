@@ -59,13 +59,13 @@ export default {
 <style lang="stylus" scoped>
 @import '~common/stylus/variable'
 .footer-tab
-  position: fixed
+  position: absolute
   display: flex
   left: 0
   right: 0
   bottom: 0
   height: 43px
-  z-index: 3
+  z-index: 2
   background: #f8f8f8
   padding: 4px 0px
   box-sizing: border-box

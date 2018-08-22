@@ -1,5 +1,5 @@
 <template lang="html">
-  <scroll :click="true" class="scroll" ref="sc" :style="{height: this.height}">
+  <scroll :click="true" class="scroll" ref="sc" >
     <div class="home">
       <swiper class="swiper-wrapper" ></swiper>
       <search></search>
@@ -24,23 +24,19 @@ import Gap from 'base/gap/gap'
 import Spacial from './components/spacial'
 import WellChosen from './components/well-chosen'
 import axios from 'axios'
-import {getAxios} from 'common/js/mm'
+import {
+  getAxios
+} from 'common/js/mm'
 export default {
   name: 'Home',
   data() {
     return {
-      height: 0,
       recommendList: [],
       spacialList: [],
       chosenList: []
     }
   },
   methods: {
-    _getHeight() {
-      // let h = window.screen.height
-      // this.height = h - 160 + 'px'
-      this.height = '725px'
-    },
     _getHomeProduct() {
       axios.get('/product/list.do?keyword=2').then((res) => {
         this.recommendList = res.data.data.list
@@ -83,15 +79,6 @@ export default {
     this._getHomeProduct()
     this._getSpacialProduct()
     this._getChosenProduct()
-    this._getHeight()
-    this.$nextTick(() => {
-      this.$refs.sc.refresh()
-    })
-    // getAxios({
-    //   url: '/user/logout.do'
-    // },(res) => {
-    //     console.log(res)
-    // })
   }
 }
 </script>
@@ -99,12 +86,11 @@ export default {
 <style lang="stylus" scoped>
 @import '~common/stylus/variable'
   .scroll
-    position: relative
-    top: 0px
+    position: absolute
+    top: 44px
     left: 0px
     right: 0px
     bottom: 43px
-    // width: 100%
     overflow: hidden
     .home
       .swiper-wrapper

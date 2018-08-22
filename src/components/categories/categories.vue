@@ -68,6 +68,7 @@ export default {
   bottom: 43px
   background: #fff
   display: flex
+  z-index: 10
   &.v-enter-active, &.v-leave-active
     transition: all .4s
   &.v-enter, &.v-leave-to

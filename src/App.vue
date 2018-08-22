@@ -21,9 +21,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#app
+/* #app
   overflow: hidden
-  position: absolute
+  position: relative
   top: 0
   left: 0
   right: 0
@@ -31,5 +31,5 @@ export default {
   background: $color-background
 .swal-modal
   width: 60%
-  height: 100px
+  height: 100px */
 </style>
