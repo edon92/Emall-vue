@@ -53,7 +53,7 @@
         <div class="total-price" v-show="this.cartProductList.length">
           <div class="price">共计: ￥{{cartTotalPrice}}</div>
         </div>
-        <div class="addToCart" @click="loginOrPay">去支付</div>
+        <router-link tag="div" to="/confirm" class="addToCart" v-show="cartProductList.length">去支付</router-link>
       </div>
     </transition>
     <transition>
@@ -130,9 +130,12 @@ export default {
     },
     loginOrPay() {
       this._checkLogin()
+      this.$emit('addToCart')
     },
     _checkLogin() {
-      this.getAjax('/user/get_information.do', '/shopcart-list-big')
+      this.$nextTick(() => {
+        this.getAjax('/user/get_information.do', '/shopcart-list-big')
+      })
     },
     decreaseCount(id, nowCount) {
       // this.$emit('decCount', id)

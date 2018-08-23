@@ -118,7 +118,6 @@ export default {
         return
       }
       if (this.stage === 3) {
-        console.log(3)
         this.passwordNew = this.$refs.password.value
         if (!validate(this.passwordNew, 'require')) {
           Salert('密码不能为空', 'error')

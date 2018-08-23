@@ -90,7 +90,6 @@ export default {
         url: '/user/get_information.do'
       }, (res) => {
         this.userInformation = res.data.data
-        console.log(this.userInformation)
         this.showInformation = true
       })
     },
@@ -119,7 +118,6 @@ export default {
       getAxios({
         url: `/user/update_information.do?${data}`
       }, (res) => {
-        console.log(res)
         this._getUserInformation()
         Salert('修改信息成功', 'success')
         this.IsEdit = false

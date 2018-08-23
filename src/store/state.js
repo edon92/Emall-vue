@@ -1,5 +1,6 @@
 const state = {
   keyword: '手机',
-  shopcartList: []
+  shopcartList: [],
+  userInformation: {}
 }
 export default state

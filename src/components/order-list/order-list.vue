@@ -70,7 +70,6 @@ export default {
       getAxios({
         url: '/order/list.do'
       }, (res) => {
-        // console.log(res)
         this.orderNoList = res.data.data.list
         // 把获取用户订单号放在一个数组
         this.orderNoList.forEach((item) => {
@@ -98,7 +97,6 @@ export default {
   watch: {
     list() {
       this._getOrderDetail()
-      console.log('detail', this.orderListData)
     }
   }
 }

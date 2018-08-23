@@ -57,7 +57,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      console.log('recomend', this.recommendList)
     })
   },
   watch: {

@@ -35,7 +35,6 @@ export default {
       getAxios({
         url: url
       }, (res) => {
-        console.log(res)
         if (res.data.status === 10) {
           doLogin()
           return

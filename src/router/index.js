@@ -17,6 +17,7 @@ import PassReset from 'components/pass-reset/pass-reset'
 import OrderList from 'components/order-list//order-list'
 import shopcartListBig from 'components/shopcart-list-big/shopcart-list-big'
 import Login from 'components/login/login'
+import Confirm from 'components/confirm/confirm'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,10 @@ export default new Router({
     {
       path: '/register',
       component: Register
+    },
+    {
+      path: '/confirm',
+      component: Confirm
     },
     {
       path: '/pass-reset',

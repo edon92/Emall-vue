@@ -35,7 +35,6 @@ export default {
     _getPhoneData() {
       axios.get('/product/list.do?keyword=手机').then((res) => {
         this.phoneData = res.data.data.list
-        console.log(res)
       })
     },
     selectProduct(id) {

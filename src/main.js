@@ -8,7 +8,10 @@ import 'common/iconfont/iconfont.css'
 import 'common/reset.css'
 import VueLazyLoad from 'vue-lazyload'
 import store from './store'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
+Vue.use(ElementUI)
 Vue.use(VueLazyLoad, {
   loading: require('common/image/lazyload.gif')
 })

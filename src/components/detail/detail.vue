@@ -197,7 +197,6 @@ export default {
       this.detail = res.data.data.detail
       this.$nextTick(() => {
         this.imgHeight = this.$refs.imgBox[0].$el.offsetHeight + 'px'
-        console.log(this.imgHeight)
       })
     })
   },

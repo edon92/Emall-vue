@@ -69,7 +69,6 @@ export default {
     _getSearchList(word) {
       axios.get(`/product/list.do?keyword=${word}`).then((res) => {
         this.searchList = res.data.data.list
-        console.log(this.searchList)
       })
     },
     selectItem(id) {
@@ -84,12 +83,10 @@ export default {
     ])
   },
   activated() {
-    console.log('act', this.keyword)
     this._getSearchList(this.keyword)
   },
   watch: {
     keyword() {
-      console.log('change')
       this._getSearchList(this.keyword)
     }
   }

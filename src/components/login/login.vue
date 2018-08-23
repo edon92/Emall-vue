@@ -42,6 +42,7 @@
 import swal from 'sweetalert'
 import {validate, getAxios} from 'common/js/mm'
 // import axios from 'axios'
+import {mapMutations} from 'vuex'
 export default {
   methods: {
     data() {
@@ -51,6 +52,9 @@ export default {
     back() {
       this.$router.back()
     },
+    ...mapMutations({
+      setUserInformation: 'SET_USERINFORMATION'
+    }),
     doLogin() {
       let inputUsername = this.$refs.username.value
       let inputPassword = this.$refs.password.value
@@ -71,6 +75,7 @@ export default {
         }
         if (res.data.status === 0) {
           this.tips(res.data.msg, 'success')
+          this.setUserInformation(res.data.data)
           this.$router.push('/home')
         }
       })

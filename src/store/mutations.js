@@ -50,6 +50,9 @@ const mutations = {
         state.shopcartList.splice(i, 1)
       }
     }
+  },
+  [types.SET_USERINFORMATION](state, information) {
+    state.userInformation = information
   }
 }
 export default mutations

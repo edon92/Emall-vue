@@ -74,7 +74,6 @@ export default {
       getAxios({
         url: `/user/reset_password.do?${data}`
       }, (res) => {
-        console.log(res)
         if (res.data.status === 1) {
           Salert('旧密码输入错误', 'error')
           return

@@ -30,7 +30,7 @@ export function goHome() {
   window.location.href = '/home'
 }
 
-export function getAxios(params, bc) {
+export function getAxios(params, bc, er) {
   axios({
     method: params.type || 'post',
     url: params.url || '',
@@ -43,8 +43,7 @@ export function getAxios(params, bc) {
       return str.join('&')
     }
   }).then(bc).catch((error) => {
-    console.log(error)
-    Salert('请求失败，请确保网络完好', 'error')
+    alert(error)
     window.location.href = '/#/home'
   })
 }

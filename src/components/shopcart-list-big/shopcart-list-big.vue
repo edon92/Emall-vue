@@ -62,7 +62,7 @@
         <i class="iconfont icon-dui" :class="{unCheack: !AllCheck}" @click="selectAll"></i>
         <span class="text" >全选</span>
       </div>
-      <div class="GoTopay">去支付</div>
+      <div class="GoTopay" @click="createOrder">去支付</div>
       <div class="totalPrice">
         <div class="msg1">
           <span class="countAll">合计：</span>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import {getAxios, transformData} from 'common/js/mm'
+import {getAxios, transformData, Salert} from 'common/js/mm'
 import GapBox from 'base/gap/gap'
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
@@ -104,7 +104,15 @@ export default {
         this.cartProductList = res.data.data.cartProductVoList
         this.cartTotalPrice = res.data.data.cartTotalPrice
         this.showLoading = false
-        console.log('_get', this.cartProductList)
+      })
+    },
+    createOrder() {
+      if (this.cartTotalPrice <= 0) {
+        Salert('请先选择购买的商品', 'error')
+        return
+      }
+      this.$router.push({
+        path: '/confirm'
       })
     },
     back() {
@@ -119,7 +127,6 @@ export default {
       this.IsEdit = !this.IsEdit
     },
     deleteItem(id) {
-      console.log(id)
       let data = transformData({
         productIds: id
       })
@@ -127,7 +134,6 @@ export default {
         url: `/cart/delete_product.do?${data}`,
         data: data
       }, (res) => {
-        console.log(res)
         this._getShopcartList()
       })
     },
@@ -153,11 +159,13 @@ export default {
         url: `/cart/update.do?${data}`,
         data: data
       }, (res) => {
-        console.log('success')
         this._getShopcartList()
       })
     },
     decreaseCount(id, nowCount) {
+      if (nowCount <= 0) {
+        return
+      }
       let data = transformData({
         productId: id,
         count: nowCount - 1
@@ -166,7 +174,6 @@ export default {
         url: `/cart/update.do?${data}`,
         data: data
       }, (res) => {
-        console.log('success')
         this._getShopcartList()
       })
     },
@@ -188,7 +195,6 @@ export default {
       }
     },
     Unchecked(id, status) {
-      console.log(id, status)
       // 如果已经选中，那么删除
       if (status === 1) {
         let data = transformData({
@@ -222,12 +228,9 @@ export default {
   activated() {
     this._getShopcartList()
     this.$nextTick(() => {
-      console.log('sec')
       if (this.cartTotalPrice > 0) {
-        console.log('>')
         this.AllCheck = true
       } else {
-        console.log('=')
         this.AllCheck = false
       }
     })
@@ -403,8 +406,8 @@ export default {
         left: 0px
         right: 0px
   .PriceAndPay
-    position: absolute
-    bottom: -44px
+    position: fixed
+    bottom: 0px
     left: 0
     right: 0
     height: 44px
