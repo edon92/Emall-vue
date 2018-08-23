@@ -36,15 +36,15 @@
               </div>
               <div class="msg">
                 <div class="name" ref="goodName">{{item.productName}}</div>
-                <div class="iconfont icon-cuo" @click="deleteItem(item.productId)"></div>
+                <div class="iconfont icon-cuo" @click.stop="deleteItem(item.productId)"></div>
                 <div class="origina-cost">￥{{item.productPrice + 128}}</div>
                 <div class="discount-price">￥{{item.productPrice}}</div>
               </div>
               <div class="count">
                 <div class="countBtn">
-                  <i class="iconfont icon-jian btn" @click="decreaseCount(item.productId, item.quantity)"></i>
-                  <input type="text" class="num" :value="item.quantity" ref="goodCount">
-                  <i class="iconfont icon-jia btn" @click="increaseCount(item.productId, item.quantity)"></i>
+                  <i class="iconfont icon-jian btn" @click.stop="decreaseCount(item.productId, item.quantity)"></i>
+                  <input type="text" class="num" :value="item.quantity" ref="goodCount" @click.stop>
+                  <i class="iconfont icon-jia btn" @click.stop="increaseCount(item.productId, item.quantity)"></i>
                 </div>
               </div>
             </div>
@@ -130,7 +130,9 @@ export default {
     },
     loginOrPay() {
       this._checkLogin()
-      this.$emit('addToCart')
+      setTimeout(() => {
+        this.$emit('addToCart')
+      }, 50)
     },
     _checkLogin() {
       this.$nextTick(() => {
@@ -214,6 +216,9 @@ export default {
         this._getShopcartList()
       }
     })
+  },
+  activated() {
+    this.fold = false
   }
 }
 </script>
@@ -387,6 +392,7 @@ export default {
             height: 20px
             font-size: 18px
             border: 1px solid #ccc
+            border-radius: .1rem
           .icon-jian
             margin-right: -1px
           .icon-jia

@@ -10,8 +10,26 @@
       </div>
     </div>
     <div
+     class="no-address user-Address"
+     v-show="!AddressList.length"
+     >
+      <div class="iconfont icon-didian"></div>
+      <div class="address-box">
+        <div class="text text-line-1">
+          <span class="name"></span>
+          <span class="phone"></span>
+        </div>
+        <div class="text text-line-2">
+          <span class="address">
+            用户还未设置地址，请点击右侧箭头设置 >>>
+          </span>
+        </div>
+      </div>
+      <div class="iconfont icon-qianjin" @click="moreAddress"></div>
+    </div>
+    <div
      class="user-Address"
-     v-show="AddressList.length"
+     v-if="AddressList.length"
      >
       <div class="iconfont icon-didian"></div>
       <div class="address-box">
@@ -38,7 +56,7 @@
           class="good border-bottom"
           v-for="(item, index) in cartProductList"
           :key="index"
-          v-show="item.quantity"
+          v-show="cartProductList.length"
           @click="ToDetail(item.productId)"
           >
           <div class="img">
@@ -46,7 +64,7 @@
           </div>
           <div class="msg">
             <div class="name" ref="goodName">{{item.productName}}</div>
-            <div class="discount-price">￥{{item.productPrice}}</div>
+            <div class="discount-price">￥{{item.currentUnitPrice}}</div>
           </div>
           <div class="count">
             <div class="countBtn">
@@ -71,7 +89,7 @@
                 {{item.receiverProvince + item.receiverCity + item.receiverAddress}}
               </span>
             </div>
-            <div class="iconfont icon-tianxie" @click="moreAddress"></div>
+            <div class="iconfont icon-tianxie" @click="changeAddress"></div>
           </div>
           <div class="add address-box border-bottom" @click.stop="addAddress">
             <i class="iconfont icon-jia" style="font-size: 12px"></i>添加收货地址
@@ -93,7 +111,7 @@
                 {{item.receiverProvince + item.receiverCity + item.receiverAddress}}
               </span>
             </div>
-            <div class="iconfont icon-tianxie" @click="moreAddress"></div>
+            <div class="iconfont icon-tianxie" @click="changeAddress"></div>
           </div>
           <div class="add address-box border-bottom" @click.stop="addAddress">
             <i class="iconfont icon-jia" style="font-size: 12px"></i>添加收货地址
@@ -126,7 +144,7 @@
             <span class="zip">邮政编码：</span>
             <input type="text" class="input zipInput" placeholder="填写邮政编码" ref="zip">
           </div>
-          <div class="addToAddressList" @click="addToAddressList" v-show="AddressList.length">添加到地址列表</div>
+          <div class="addToAddressList" @click="addToAddressList">添加到地址列表</div>
         </div>
       </div>
     </transition>
@@ -145,6 +163,9 @@
     <div class="payment-wrapper" v-if="isPayment">
       <payment :orderNumber="orderNumber"></payment>
     </div>
+    <div class="clickAfterloading-wrapper" v-show="isClickAndLoad">
+      <loading></loading>
+    </div>
   </div>
 </template>
 
@@ -153,11 +174,12 @@ import CitySelect from 'components/city-select/city-select'
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
 import Payment from 'components/payment/payment'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import {
   getAxios,
   doLogin,
-  transformData
+  transformData,
+  Salert
 } from 'common/js/mm'
 export default {
   components: {
@@ -177,6 +199,7 @@ export default {
       isChangeAdress: false,
       selectAddressNum: 0,
       selectAddressData: [],
+      isClickAndLoad: false,
       isPayment: false,
       orderNumber: 0
     }
@@ -190,15 +213,23 @@ export default {
     back() {
       this.$router.back()
     },
+    ...mapMutations({
+      setUserInformation: 'SET_USERINFORMATION'
+    }),
+    changeAddress() {
+      alert('接口维修中，请点添加新地址')
+    },
     createOrder() {
       if (this.cartTotalPrice <= 0) {
         return
       }
+      this.isClickAndLoad = true
       getAxios({
         url: `/order/create.do?shippingId=${this.defalutAddress.id}`
       }, (res) => {
-        this.isPayment = true
+        this.isClickAndLoad = false
         this.orderNumber = res.data.data.orderNo
+        this.isPayment = true
       })
     },
     addAddress() {
@@ -226,7 +257,9 @@ export default {
       getAxios({
         url: `/shipping/add.do?${data}`
       }, (res) => {
+        Salert('添加地址成功', 'success')
         this.isEditAddress = false
+        window.location.reload()
       })
     },
     selectAddress(index) {
@@ -256,6 +289,7 @@ export default {
           return
         }
         if (res.data.status === 0) {
+          this.setUserInformation(res.data.data)
           this._getUserAddress()
           this._getShopcartList()
         }
@@ -467,6 +501,7 @@ export default {
         text-align: right
         .input
           width: 4rem
+          -webkit-appearance: none
           @media only screen and (min-width: 320px)
             width: 3.6rem
           @media only screen and (min-width: 375px)
@@ -569,4 +604,8 @@ export default {
       background: $color-text-o-d
       float: right
       color: #FFF
+  .clickAfterloading-wrapper
+    position: relative
+    top: 20%
+    z-index: 100
 </style>

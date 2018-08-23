@@ -6,6 +6,7 @@
         <i class="iconfont icon-houtui"></i>
         返回
       </span>
+      <span class="gouwuche">购物车</span>
       <span class="edit" @click.prevent="edit">编辑</span>
     </div>
     <div class="loading-wrapper" v-show="showLoading">
@@ -38,6 +39,7 @@
                 class="num"
                 :value="item.quantity"
                 ref="goodCount"
+                @click.stop
                 @blur.prevent="submitQuantity(item.productId, index)"
                >
                <div class="iconfont icon-jia btn" @click.stop="increaseCount(item.productId, item.quantity)"></div>
@@ -257,7 +259,7 @@ export default {
   top: 0
   left: 0
   right: 0
-  bottom: 44px
+  bottom: 0
   background: $color-background
   padding: 2px 10px
   z-index: 100
@@ -278,6 +280,8 @@ export default {
     z-index: 300
     .title
       color: #444
+    .gouwuche
+      margin-left: 30%
     .edit
       float: right
       color: rgb(56,161,216)
@@ -316,6 +320,7 @@ export default {
           width: 100px
           font-size: $font-size-medium
           font-size: 0px
+          border-radius: .04rem
           .num
             margin-top: 5px
             padding: 0px
@@ -330,6 +335,7 @@ export default {
           .btn
             height: 18px
             border: 1px solid #ccc
+            border-radius: .1rem
           .icon-jian
             position: absolute
           .icon-jia

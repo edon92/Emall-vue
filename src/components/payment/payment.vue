@@ -1,20 +1,19 @@
 <template lang="html">
   <transition>
-    <div class="payment" v-show="show">
+    <div class="payment">
       <router-link tag="div" to="/home" class="home">
         <i class="iconfont icon-houtui">返回商城</i>
       </router-link>
       <div class="header">订单提交成功，请您尽快支付！ 订单号：{{orderNumber}}</div>
       <div class="subtitle">请使用支付宝扫描如下二维码进行支付：</div>
       <div class="pay-img">
-        <img :src="paymentData.qrUrl" alt="">
+        <img src="../../common/image/payment.png" alt="">
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-import {getAxios} from 'common/js/mm'
 export default {
   props: {
     orderNumber: {
@@ -24,17 +23,9 @@ export default {
   },
   data() {
     return {
-      paymentData: {},
-      show: false
     }
   },
   mounted() {
-    getAxios({
-      url: `http://localhost:8080/order/pay.do?orderNo=${this.orderNumber}`
-    }, (res) => {
-      this.paymentData = res.data.data
-      this.show = true
-    })
   }
 }
 </script>
